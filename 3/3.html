@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <script src="./3.js" rel="stylesheet"></script> -->
+  </head>
+  <body>
+    <p>Xin mời nhập dãy số, các số cách nhau hơi dấu ",":</p>
+    <input id="inputNumber" type="text" />
+    <p>Chia các cặp số theo số lượng:</p>
+    <input id="radio" name="radio" value="2" checked type="radio" />2
+    <input id="radio" name="radio" value="3" type="radio" />3
+    <br />
+    <button id="submit-btn">submit</button>
+
+    <h1 id="result"></h1>
+    <script>
+      const button = document.querySelector("#submit-btn");
+      console.log(button);
+      const inputNumber = document.querySelector("#inputNumber");
+      const radio = document.querySelectorAll("#radio");
+      button.onclick = () => {
+        console.log(inputNumber.value);
+        console.log(radio);
+        var slg;
+        const wrapArr = [];
+        const arr = inputNumber.value.split(",");
+        console.log(arr);
+
+        radio.forEach((element) => {
+          if (element.checked === true) {
+            slg = element.value;
+          }
+        });
+        if (slg === "2") {
+          for (let i = 0; i < arr.length - 1; i++) {
+            for (let j = i + 1; j < arr.length; j++) {
+              wrapArr.push(`${arr[i]},${arr[j]}`);
+            }
+          }
+        } else if (slg === "3") {
+          for (let i = 0; i < arr.length - 2; i++) {
+            for (let j = i + 1; j < arr.length - 1; j++) {
+              for (let x = j + 1; x < arr.length; x++) {
+                wrapArr.push(`${arr[i]},${arr[j]},${arr[x]}`);
+              }
+            }
+          }
+        }
+
+        const result = document.getElementById('result')
+        console.log(result);
+        result.innerHTML=`các cặp số từ dãy số trên là: ${wrapArr.map((item)=>{
+            return `(${item})`
+        })}`
+        console.log(wrapArr);
+      };
+    </script>
+  </body>
+</html>
